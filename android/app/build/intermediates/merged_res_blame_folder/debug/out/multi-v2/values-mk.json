@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/alexandreoliveira/Documents/rocketseat/project-myskills/myskills/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-mk/values-mk.xml",
+            "outputFile": "/home/alexandreoliveira/Documents/project-myskills/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-mk/values-mk.xml",
             "map": [
                 {
                     "source": "/home/alexandreoliveira/.gradle/caches/transforms-2/files-2.1/d14dbad7340cad958a2e361a440b498d/appcompat-1.1.0/res/values-mk/values-mk.xml",
