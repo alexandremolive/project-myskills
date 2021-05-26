@@ -1,0 +1,14 @@
+com/myskills/ReactNativeFlipper.java
+ com.myskills.ReactNativeFlipper
+ com.myskills.ReactNativeFlipper$1
+ com.myskills.ReactNativeFlipper$2
+ com.myskills.ReactNativeFlipper$2$1
+com/myskills/MainActivity.java
+ com.myskills.MainActivity
+com/myskills/MainApplication.java
+ com.myskills.MainApplication
+ com.myskills.MainApplication$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
+com/myskills/BuildConfig.java
+ com.myskills.BuildConfig
