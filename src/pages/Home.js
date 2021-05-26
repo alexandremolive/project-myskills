@@ -1,43 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
+  FlatList,
+
 } from 'react-native';
+import { Button } from '../components/Button';
+import { SkillCard } from '../components/SkillCard';
 
 export function Home() {
   const [newSkill, setNewSkill] = useState('')
   const [mySkills, setMySkills] = useState([])
+  const [greeting, setGreeting] = useState('')
 
   function handleAddNewSkill() {
     setMySkills((oldSkill => [...oldSkill, newSkill]))
   }
+
+  useEffect(() => {
+    const currentHour = new Date().getHours()
+    if (currentHour < 12) {
+      setGreeting('Good Morning')
+    } else if (currentHour >= 12 && currentHour < 18){
+      setGreeting('Good Afternoon')
+    } else {
+      setGreeting('Good Night')
+    }
+  }, [])
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome Alexandre</Text>
+        <Text
+          style={styles.title}
+        >
+          Welcome Alexandre
+          </Text>
         <TextInput
           style={styles.input}
           placeholder="New Skill"
           placeholderTextColor="#555"
           onChangeText={setNewSkill}
         />
-        <TouchableOpacity style={styles.button} activeOpacity={0.7}>
-          <Text onPress={handleAddNewSkill} style={styles.buttonText}> Add</Text>
-        </TouchableOpacity>
-        <Text style={[styles.title, { marginVertical: 50 }]}>My Skills</Text>
-       { 
-       mySkills.map((skill) => (
-       <TouchableOpacity key={skill} style={styles.buttonSkill} activeOpacity={0.7}>
-          <Text style={styles.textSkill}>
-        {skill}
+        <Text style={styles.greetings}>
+          {greeting}
+        </Text>
+        <Button onPress={handleAddNewSkill} />
+        <Text
+          style={[styles.title, { marginVertical: 50 }]}
+        >
+          My Skills
           </Text>
-        </TouchableOpacity>
-        ))
-        }
-
+        <FlatList
+          data={mySkills}
+          keyExtractor={item => item}
+          renderItem={({ item }) => (
+            <SkillCard skill={item} />
+          )}
+        />
       </View>
     </>
   );
@@ -63,29 +84,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 7,
   },
-  button: {
-    backgroundColor: '#a370f7',
-    padding: 15,
-    borderRadius: 7,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  buttonText: {
+  greetings: {
     color: '#fff',
-    fontSize: 17,
-    fontWeight: 'bold',
-  },
-  buttonSkill: {
-    backgroundColor: '#1f1e25',
-    padding: 15,
-    borderRadius: 50,
-    alignItems:'center'
-
-  },
-  textSkill: {
-    color: '#fff',
-    fontSize: 22,
-    fontWeight: 'bold',
-    
+    marginTop: 5
   }
+
+
 });
