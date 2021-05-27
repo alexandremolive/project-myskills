@@ -10,20 +10,31 @@ import {
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkillCard';
 
+interface SkillData {
+  id: string,
+  name: string,
+}
+
 export function Home() {
-  const [newSkill, setNewSkill] = useState('')
-  const [mySkills, setMySkills] = useState([])
-  const [greeting, setGreeting] = useState('')
+  const [newSkill, setNewSkill] = useState('');
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
+  const [greeting, setGreeting] = useState('');
 
   function handleAddNewSkill() {
-    setMySkills((oldSkill => [...oldSkill, newSkill]))
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill,
+    };
+
+
+    setMySkills((oldSkill => [...oldSkill, data]))
   }
 
   useEffect(() => {
     const currentHour = new Date().getHours()
     if (currentHour < 12) {
       setGreeting('Good Morning')
-    } else if (currentHour >= 12 && currentHour < 18){
+    } else if (currentHour >= 12 && currentHour < 18) {
       setGreeting('Good Afternoon')
     } else {
       setGreeting('Good Night')
@@ -37,16 +48,20 @@ export function Home() {
         >
           Welcome Alexandre
           </Text>
+        <Text style={styles.greetings}>
+          {greeting}
+        </Text>
         <TextInput
           style={styles.input}
           placeholder="New Skill"
           placeholderTextColor="#555"
           onChangeText={setNewSkill}
         />
-        <Text style={styles.greetings}>
-          {greeting}
-        </Text>
-        <Button onPress={handleAddNewSkill} />
+
+        <Button 
+        onPress={handleAddNewSkill} 
+        title='Add'
+        />
         <Text
           style={[styles.title, { marginVertical: 50 }]}
         >
@@ -54,9 +69,9 @@ export function Home() {
           </Text>
         <FlatList
           data={mySkills}
-          keyExtractor={item => item}
+          keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <SkillCard skill={item} />
+            <SkillCard skill={item.name} />
           )}
         />
       </View>
